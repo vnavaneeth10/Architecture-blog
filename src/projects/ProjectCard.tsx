@@ -1,5 +1,6 @@
 //importing the project data
 import type { Project } from './Project';
+import { motion } from "framer-motion";
 
 function formatDescription(description: string): string {
     return description.substring(0, 60) + '...';
@@ -21,7 +22,11 @@ const ProjectCard = ({ project, onEdit }: ProjectCardProps) => {
         //
     }
     return (
-        <div className="card">
+        <motion.div className="card" style={{}} whileHover={{ scale: 0.99 }} transition={{ duration: 0.1 }} whileTap={{
+                opacity: 1,
+                scale: 1.05,
+                boxShadow: "0px 5px 8px #222",
+            }}>
             <img src={project.imageUrl} alt={project.name} />
             <section className="section dark">
                 <h5 className="strong">
@@ -39,7 +44,7 @@ const ProjectCard = ({ project, onEdit }: ProjectCardProps) => {
                     Edit
                 </button>
             </section>
-        </div>
+        </motion.div>
     )
 }
 
