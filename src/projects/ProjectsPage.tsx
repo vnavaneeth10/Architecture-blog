@@ -12,7 +12,7 @@ function ProjectsPage() {
 
       <ProjectList projects={MOCK_PROJECTS} onSave={saveProject}/>
       {/* passing the mock data to Project List component */}
-      <Hello/>
+      {/* <Hello/> */}
     </>
   );
 }

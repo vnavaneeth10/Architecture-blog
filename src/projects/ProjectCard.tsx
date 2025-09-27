@@ -22,10 +22,10 @@ const ProjectCard = ({ project, onEdit }: ProjectCardProps) => {
         //
     }
     return (
-        <motion.div className="card" style={{}} whileHover={{ scale: 0.99 }} transition={{ duration: 0.1 }} whileTap={{
+        <motion.div className="card"  transition={{ duration: 0.1 }} whileHover={{
                 opacity: 1,
-                scale: 1.05,
-                boxShadow: "0px 5px 8px #222",
+                scale: 1,
+                boxShadow: "0px 2px 3px #222",
             }}>
             <img src={project.imageUrl} alt={project.name} />
             <section className="section dark">
@@ -38,11 +38,15 @@ const ProjectCard = ({ project, onEdit }: ProjectCardProps) => {
                 <p>Budget : {project.budget.toLocaleString('en-US', { style: 'currency', currency: 'INR' })}/-</p>
 
 
-                <button className='bordered' onClick={() => handleEditClick(project)}>
+                <motion.button className='bordered' onClick={() => handleEditClick(project)} whileHover={{
+                opacity: 1,
+                scale: 1,
+                boxShadow: "0px 2px 2px #222",
+            }}>
                     {/* this button is to edit the card component with the click function and edit button */}
                     <span className='icon-edit'></span>
                     Edit
-                </button>
+                </motion.button>
             </section>
         </motion.div>
     )

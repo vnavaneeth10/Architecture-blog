@@ -1,18 +1,23 @@
-import type { SyntheticEvent } from "react"
+import { useState, type SyntheticEvent } from "react"
 import { Project } from "./Project"
+import { motion } from "framer-motion";
 
 
 interface ProjectFormProps {
+    project?:Project;
     onSave:(project:Project)=>void
     onCancel:()=>void
 }
-const ProjectForm = ({onSave,onCancel}:ProjectFormProps) => {
+const ProjectForm = ({project: initialProject,onSave,onCancel}:ProjectFormProps) => {
     // thi is the form component
+    const [project,setProject] = useState(initialProject)
 
     const handleSubmit=(e:SyntheticEvent)=>{
         e.preventDefault();
         onSave(new Project({name: 'Updated Project'}))
     }
+
+    
     return (
         <>
             <form className="input-group vertical" onSubmit={handleSubmit}>
@@ -35,10 +40,18 @@ const ProjectForm = ({onSave,onCancel}:ProjectFormProps) => {
 
                 <div className="input-group">
                     {/* Button to save the filled form data */}
-                    <button className="primary bordered medium">Save</button>
+                    <motion.button className="primary bordered medium" whileHover={{
+                opacity: 1,
+                scale: 1,
+                boxShadow: "0px 2px 2px #222",
+            }}>Save</motion.button>
                     <span></span>
                     {/* Button to cancel*/}
-                    <button type="button" className="bordered medium" onClick={onCancel}>cancel</button>
+                    <motion.button type="button" className="bordered medium" onClick={onCancel} whileHover={{
+                opacity: 1,
+                scale: 1,
+                boxShadow: "0px 2px 2px #222",
+            }}>cancel</motion.button>
                 </div>
             </form>
         </>
