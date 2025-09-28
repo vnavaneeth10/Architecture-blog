@@ -34,7 +34,7 @@ const ProjectList = ({ projects, onSave }: ProjectListProps) => {
 
                     {
                         project === projectBeingEdited ?
-                            (<ProjectForm onCancel={cancelEditing} onSave={onSave} />)
+                            (<ProjectForm onCancel={cancelEditing} onSave={onSave} project={project}/>)
                             :
                             (<ProjectCard project={project} onEdit={handleEdit} />)
                     }
