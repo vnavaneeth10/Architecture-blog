@@ -17,18 +17,18 @@ interface ProjectFormProps {
     onCancel: () => void
     // function to cancel the editing
 }
-const ProjectForm = ({ 
-    project: initialProject, 
-    onSave, 
-    onCancel 
+const ProjectForm = ({
+    project: initialProject,
+    onSave,
+    onCancel
 }: ProjectFormProps) => {
     // if there is no initial project (when adding a new project) set the initial project to an empty object
     const [project, setProject] = useState(initialProject)
     // state to keep track of the project being edited or added
-    const[errors,setErrors] = useState({
-        name:'',
-        description:'',
-        budget:''
+    const [errors, setErrors] = useState({
+        name: '',
+        description: '',
+        budget: ''
     }) // state to keep track of the errors in the form fields
 
     const handleSubmit = (e: SyntheticEvent) => {
