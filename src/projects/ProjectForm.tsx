@@ -9,6 +9,7 @@ interface ProjectFormProps {
     onCancel:()=>void
 }
 const ProjectForm = ({project: initialProject,onSave,onCancel}:ProjectFormProps) => {
+    //rename it initialProject so that we can name our state variable project
     // thi is the form component
     const [project,setProject] = useState(initialProject)
 

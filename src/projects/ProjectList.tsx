@@ -25,13 +25,18 @@ const ProjectList = ({ projects, onSave }: ProjectListProps) => {
 
     return (
         <div className="row">
+            
             {/* the passed mock data is mapped or iterated here and passed to the Project Card component as props*/}
 
             {projects.map((project) => (
 
                 <div key={project.id} className="cols-sm">
+
                     {
-                        project === projectBeingEdited ? (<ProjectForm onCancel={cancelEditing} onSave={onSave} />) : (<ProjectCard project={project} onEdit={handleEdit} />)
+                        project === projectBeingEdited ?
+                            (<ProjectForm onCancel={cancelEditing} onSave={onSave} />)
+                            :
+                            (<ProjectCard project={project} onEdit={handleEdit} />)
                     }
 
 
