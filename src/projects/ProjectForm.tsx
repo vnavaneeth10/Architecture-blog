@@ -35,6 +35,8 @@ const ProjectForm = ({
         //function to handle the form submission
         e.preventDefault();
         // onSave(new Project({ name: 'Updated Project' }))
+        if(!isValid()) return;
+        // if the form is not valid do not submit
         onSave(project);
     }
 
@@ -76,8 +78,43 @@ const ProjectForm = ({
             return updatedProject
         })
         // setting the project state to the updated project object
+        setErrors(()=>validate(updatedProject))
+
+    }
 
 
+    function validate(project: Project) {
+        let errors: any = {
+            name: '',
+            description: '',
+            budget: ''
+        };
+
+        if (project.name.length === 0) {
+            errors.name = 'Name is required';
+        }
+
+        if (project.name.length > 0 && project.name.length < 3) {
+            errors.name = 'Name needs to be at least 3 characters long+';
+        }
+
+        if (project.description.length === 0) {
+            errors.description = 'Description is required';
+        }
+
+        if (project.budget < 0) {
+            errors.budget = 'Budget must be greater than $0'
+        }
+
+        return errors;
+    }
+
+    function isValid() {
+        return (
+            errors.name.length === 0 &&
+            errors.description.length === 0 &&
+            errors.budget.length === 0
+        )
     }
 
 
@@ -104,14 +141,34 @@ const ProjectForm = ({
                     onChange={handleChange}
                 />
 
+                {
+                    errors.name.length > 0 && (
+                        <div className="card error">
+                            <p>{errors.name}</p>
+                        </div>
+                    )
+                }
+
                 {/* label of the description */}
                 <label htmlFor="description">Project Description</label>
                 {/* description text are content */}
                 <textarea name="description" placeholder="enter description" value={project.description} onChange={handleChange} />
+                {errors.description.length > 0 && (
+                    <div className="card error">
+                        <p>{errors.description}</p>
+                    </div>
+                )}
                 {/* label of the budget */}
                 <label htmlFor="budget">Project Budget</label>
                 {/* budget input area */}
                 <input type="number" name="budget" placeholder="enter budget" value={project.budget} onChange={handleChange} />
+                {
+                    errors.budget.length > 0 && (
+                        <div className="card error">
+                            <p>{errors.budget}</p>
+                        </div>
+                    )
+                }
                 {/* label of the checkbox */}
                 <label htmlFor="isActive">Active?</label>
                 {/* checkbox input element */}
