@@ -35,9 +35,11 @@ const ProjectForm = ({
         //function to handle the form submission
         e.preventDefault();
         // onSave(new Project({ name: 'Updated Project' }))
-        if(!isValid()) return;
+        if (!isValid()) return;
         // if the form is not valid do not submit
-        onSave(project);
+        onSave(project!) // call the onSave function passed as a prop with the project being edited or added
+        // the ! is used to tell TypeScript that we are sure that project is not undefined
+        // because when adding a new project the initialProject is {} and when editing a project the initialProject is that project object
     }
 
     const handleChange = (event: any) => {
@@ -71,51 +73,52 @@ const ProjectForm = ({
         // the spread operator (...) is used to  spread the previous project properties and the new change
 
         setProject((p) => {
-            console.log("p", p)
-            console.log(" b4 updatedProject", updatedProject)
+            //console.log("p", p)
+            //console.log(" b4 updatedProject", updatedProject)
             updatedProject = new Project({ ...p, ...change })
-            console.log("after updatedProject", updatedProject)
+            //console.log("after updatedProject", updatedProject)
             return updatedProject
         })
         // setting the project state to the updated project object
-        setErrors(()=>validate(updatedProject))
+        setErrors(() => validate(updatedProject))
 
     }
 
 
     function validate(project: Project) {
-        let errors: any = {
+
+        const errors: any = { // using any type for errors object
             name: '',
             description: '',
             budget: ''
-        };
+        }; // object to hold the errors
 
         if (project.name.length === 0) {
             errors.name = 'Name is required';
-        }
+        } // if name is empty set the error message
 
         if (project.name.length > 0 && project.name.length < 3) {
-            errors.name = 'Name needs to be at least 3 characters long+';
-        }
+            errors.name = 'Name needs to be at least 3 characters long';
+        } // if name is less than 3 characters set the error message
 
         if (project.description.length === 0) {
             errors.description = 'Description is required';
-        }
+        } // if description is empty set the error message
 
         if (project.budget < 0) {
             errors.budget = 'Budget must be greater than $0'
-        }
+        } // if budget is less than 0 set the error message
 
-        return errors;
+        return errors; // return the errors object
     }
 
     function isValid() {
         return (
-            errors.name.length === 0 &&
-            errors.description.length === 0 &&
-            errors.budget.length === 0
+            errors.name.length === 0 && // if there are no errors in any of the fields
+            errors.description.length === 0 && // return true
+            errors.budget.length === 0 // otherwise return false
         )
-    }
+    } // function to check if the form is valid
 
 
     return (
@@ -137,7 +140,7 @@ const ProjectForm = ({
                     type="text"
                     name="name"
                     placeholder="enter name"
-                    value={project.name}
+                    value={project?.name}
                     onChange={handleChange}
                 />
 
@@ -153,11 +156,15 @@ const ProjectForm = ({
                 <label htmlFor="description">Project Description</label>
                 {/* description text are content */}
                 <textarea name="description" placeholder="enter description" value={project.description} onChange={handleChange} />
+
                 {errors.description.length > 0 && (
                     <div className="card error">
                         <p>{errors.description}</p>
                     </div>
                 )}
+
+                {/*  if there is an error in the description field show the error message */}
+
                 {/* label of the budget */}
                 <label htmlFor="budget">Project Budget</label>
                 {/* budget input area */}
