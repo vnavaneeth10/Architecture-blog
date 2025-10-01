@@ -4,11 +4,13 @@ import ProjectsPage from './projects/ProjectsPage'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router'
 import HomePage from './home/HomePage'
 import ProjectPage from './projects/ProjectPage'
+import { Provider } from 'react-redux'
+import { store } from './state'
 
 function App() {
   return (
     <>
-      
+      <Provider store={store}>
       {/* <Hello name="Navaneeth" enthusiasmLevel={2}/> */}
       <BrowserRouter>
 
@@ -58,7 +60,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-
+    </Provider>
       {/* <ProjectsPage /> */}
     </>
   )

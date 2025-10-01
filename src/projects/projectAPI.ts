@@ -62,9 +62,9 @@ const projectAPI = {
   },
 
 
-  get(page = 1, limit = 20) {
+  get(page = 1, limit = 10) {
     return fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
-      .then(delay(600))
+      .then(delay(2000))//simulate slow network
       .then(checkStatus)
       .then(parseJSON)
       .then(convertToProjectModels)
@@ -84,6 +84,7 @@ const projectAPI = {
         'Content-Type': 'application/json'
       }
     })
+      .then(delay(2000))
       .then(checkStatus)
       .then(parseJSON)
       .catch((error: TypeError) => {

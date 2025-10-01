@@ -1,7 +1,12 @@
 import { useState, type SyntheticEvent } from "react"
 import { Project } from "./Project"
 import { motion } from "framer-motion";
-
+import { useSaveProject } from "./projectHooks";
+ import { useDispatch } from 'react-redux';
+ import { saveProject } from './state/projectActions';
+ import { ThunkDispatch } from 'redux-thunk';
+ import { ProjectState } from './state/projectTypes';
+  import { AnyAction } from 'redux';
 
 
 interface ProjectFormProps {
@@ -12,14 +17,14 @@ interface ProjectFormProps {
     // when editing a project the value is that project object
     project?: Project;
 
-    onSave: (project: Project) => void
+    // onSave: (project: Project) => void
     // function to save the project
     onCancel: () => void
     // function to cancel the editing
 }
 const ProjectForm = ({
     project: initialProject,
-    onSave,
+    // onSave,
     onCancel
 }: ProjectFormProps) => {
     // if there is no initial project (when adding a new project) set the initial project to an empty object
@@ -31,13 +36,19 @@ const ProjectForm = ({
         budget: ''
     }) // state to keep track of the errors in the form fields
 
+    const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
+
+    const { mutate: saveProject, isPending } = useSaveProject();
+
     const handleSubmit = (e: SyntheticEvent) => {
         //function to handle the form submission
         e.preventDefault();
         // onSave(new Project({ name: 'Updated Project' }))
         if (!isValid()) return;
+        dispatch(saveProject(project));
+        saveProject(project);
         // if the form is not valid do not submit
-        onSave(project!) // call the onSave function passed as a prop with the project being edited or added
+        // onSave(project!) // call the onSave function passed as a prop with the project being edited or added
         // the ! is used to tell TypeScript that we are sure that project is not undefined
         // because when adding a new project the initialProject is {} and when editing a project the initialProject is that project object
     }
@@ -127,6 +138,7 @@ const ProjectForm = ({
                 className="input-group vertical"
                 onSubmit={handleSubmit}
             >
+                {isPending && <span className="toast">Saving...</span>}
                 {/* label of the name */}
 
                 <label

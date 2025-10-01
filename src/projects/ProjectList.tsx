@@ -6,10 +6,10 @@ import ProjectForm from './ProjectForm';
 //ProjectListProps used to mention the type of the props of passed project data
 interface ProjectListProps {
     projects: Project[];  //array of projects
-    onSave: (project: Project) => void //function to save a project
+    // onSave: (project: Project) => void //function to save a project
 }
 
-const ProjectList = ({ projects, onSave }: ProjectListProps) => {
+const ProjectList = ({ projects }: ProjectListProps) => {
     // Props are passed here  and the interface is mentioned with destructuring
 
     const [projectBeingEdited, setProjectBeingEdited] = useState<Project | undefined>()
@@ -57,7 +57,7 @@ const ProjectList = ({ projects, onSave }: ProjectListProps) => {
 
                                     <ProjectForm
                                         onCancel={cancelEditing}
-                                        onSave={onSave}
+                                        // onSave={onSave}
                                         project={project}
                                     />
 
