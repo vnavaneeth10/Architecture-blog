@@ -41,7 +41,7 @@ function ProjectsPage() {
                       setPage((oldPage) => oldPage + 1);
                     }
                   }}
-                  disabled={data.length != 10}
+                  disabled={data.length !== 10}
                 >
                   Next
                 </button>

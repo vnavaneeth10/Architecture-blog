@@ -9,12 +9,12 @@ import { Project } from './Project';
 
 export function useProjects() {
   const [page, setPage] = useState(0);
-  let queryInfo = useQuery({
+  const queryInfo = useQuery({
     queryKey: ['projects', page],
     queryFn: () => projectAPI.get(page + 1),
     placeholderData: (previousData) => previousData,
   });
-  console.log(queryInfo);
+ 
   return { ...queryInfo, page, setPage };
 }
 
