@@ -537,7 +537,7 @@
       "imageUrl": "/assets/placeimg_500_300_arch10.jpg",
       "contractTypeId": 2,
       "contractSignedOn": "2015-01-21T07:03:49.836Z",
-      "budget": 742211,
+      "budget": 7422110,
       "isActive": true
     },
     {
@@ -592,7 +592,7 @@
     },
     {
       "id": 60,
-      "name": "Hayes Groups",
+      "name": "Hayes Groups4",
       "description": "Streamlined local standardization. Molestiae qui exercitationem laboriosam necessitatibus ullam rem modi praesentium totam.",
       "imageUrl": "/assets/placeimg_500_300_arch8.jpg",
       "contractTypeId": 1,
@@ -767,8 +767,8 @@
       "imageUrl": "/assets/placeimg_500_300_arch6.jpg",
       "contractTypeId": 6,
       "contractSignedOn": "2018-08-16T18:49:06.477Z",
-      "budget": 981230,
-      "isActive": false
+      "budget": 98123,
+      "isActive": true
     },
     {
       "id": 78,

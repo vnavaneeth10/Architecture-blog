@@ -1,8 +1,7 @@
 import { Project } from './Project';
-const baseUrl = 'http://localhost:3001';
+const baseUrl = 'http://localhost:4000';
 const url = `${baseUrl}/projects`;
 // const url = `${baseUrl}/fail`;
-
 
 function translateStatusToErrorMessage(status: number) {
   switch (status) {
@@ -14,7 +13,6 @@ function translateStatusToErrorMessage(status: number) {
       return 'There was an error retrieving the project(s). Please try again.';
   }
 }
-
 function checkStatus(response: any) {
   if (response.ok) {
     return response;
@@ -34,37 +32,30 @@ function checkStatus(response: any) {
 function parseJSON(response: Response) {
   return response.json();
 }
-
-// eslint-disable-next-line
-
 function delay(ms: number) {
   return function (x: any): Promise<any> {
     return new Promise((resolve) => setTimeout(() => resolve(x), ms));
   };
 }
-
 function convertToProjectModels(data: any[]): Project[] {
-  let projects: Project[] = data.map(convertToProjectModel);
+  const projects: Project[] = data.map(convertToProjectModel);
   return projects;
 }
-
 function convertToProjectModel(item: any): Project {
   return new Project(item);
 }
 
 const projectAPI = {
-
-  find(id:number){
+  find(id: number) {
     return fetch(`${url}/${id}`)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(convertToProjectModel)
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(convertToProjectModel)
   },
 
-
-  get(page = 1, limit = 20) {
+  get(page = 1, limit = 10) {
     return fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
-      .then(delay(2000))//simulate slow network
+      .then(delay(2000))
       .then(checkStatus)
       .then(parseJSON)
       .then(convertToProjectModels)
