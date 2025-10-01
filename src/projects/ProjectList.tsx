@@ -20,7 +20,7 @@ const ProjectList = ({ projects, onSave }: ProjectListProps) => {
 
     const cancelEditing = () => {
         //function to cancel the editing of the project
-        setProjectBeingEdited({})
+        setProjectBeingEdited(undefined)
 
     }
 
