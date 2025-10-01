@@ -22,7 +22,7 @@ function checkStatus(response: any) {
       statusText: response.statusText,
       url: response.url,
     };
-    //console.log(`log server http error: ${JSON.stringify(httpErrorInfo)}`);
+    console.log(`log server http error: ${JSON.stringify(httpErrorInfo)}`);
 
     let errorMessage = translateStatusToErrorMessage(httpErrorInfo.status);
     throw new Error(errorMessage);
