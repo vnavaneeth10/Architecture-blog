@@ -155,7 +155,7 @@ const ProjectForm = ({
                 {/* label of the description */}
                 <label htmlFor="description">Project Description</label>
                 {/* description text are content */}
-                <textarea name="description" placeholder="enter description" value={project.description} onChange={handleChange} />
+                <textarea name="description" placeholder="enter description" value={project?.description} onChange={handleChange} />
 
                 {errors.description.length > 0 && (
                     <div className="card error">
@@ -168,7 +168,7 @@ const ProjectForm = ({
                 {/* label of the budget */}
                 <label htmlFor="budget">Project Budget</label>
                 {/* budget input area */}
-                <input type="number" name="budget" placeholder="enter budget" value={project.budget} onChange={handleChange} />
+                <input type="number" name="budget" placeholder="enter budget" value={project?.budget} onChange={handleChange} />
                 {
                     errors.budget.length > 0 && (
                         <div className="card error">
@@ -179,7 +179,7 @@ const ProjectForm = ({
                 {/* label of the checkbox */}
                 <label htmlFor="isActive">Active?</label>
                 {/* checkbox input element */}
-                <input type="checkbox" name="isActive" checked={project.isActive} onChange={handleChange} />
+                <input type="checkbox" name="isActive" checked={project?.isActive} onChange={handleChange} />
 
                 <div className="input-group">
                     {/* Button to save the filled form data */}

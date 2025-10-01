@@ -1,6 +1,7 @@
 //importing the project data
 import type { Project } from './Project'; //importing the project type
 import { motion } from "framer-motion";//importing motion for animation
+import { Link } from 'react-router';
 
 function formatDescription(description: string): string {
     //function to limit the description length
@@ -36,7 +37,7 @@ const ProjectCard = ({ project, onEdit }: ProjectCardProps) => {
             <img src={project.imageUrl} alt={project.name} />
 
             <section className="section dark">
-
+                <Link to={'/projects/' + project.id}>
                 {/* project name is displayed here */}
 
                 <h5 className="strong">
@@ -54,9 +55,11 @@ const ProjectCard = ({ project, onEdit }: ProjectCardProps) => {
                 // /- is added at the end to denote the amount in rupees */}
 
                 <p>Budget : {project.budget.toLocaleString('en-US', { style: 'currency', currency: 'INR' })}/-</p>
-
+                </Link>
                 {/* ternary operator to check if the project is active or not and display accordingly */}
                 <p>Status : {project.isActive ? 'Active' : 'Inactive'}</p>
+                
+
                 <motion.button
                     className='bordered'
                     onClick={() => handleEditClick(project)} //

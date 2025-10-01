@@ -36,6 +36,7 @@ function parseJSON(response: Response) {
 }
 
 // eslint-disable-next-line
+
 function delay(ms: number) {
   return function (x: any): Promise<any> {
     return new Promise((resolve) => setTimeout(() => resolve(x), ms));
@@ -52,6 +53,15 @@ function convertToProjectModel(item: any): Project {
 }
 
 const projectAPI = {
+
+  find(id:number){
+    return fetch(`${url}/${id}`)
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(convertToProjectModel)
+  },
+
+
   get(page = 1, limit = 20) {
     return fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
       .then(delay(600))
